@@ -10,7 +10,8 @@ import com.example.handlerlooperhandlerthread.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var worker: SimpleWorker
+//    private lateinit var worker: SimpleWorker
+    private lateinit var worker: HandlerThreadWorker
     private var handler = object : Handler(Looper.getMainLooper()) {
         //To receive the message from worker thread and show it in UI
         override fun handleMessage(msg: Message) {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        worker = SimpleWorker()
+        worker = HandlerThreadWorker()
 
         worker.execute {// When the execute method is called, the SimpleWorker thread will execute the code inside this runnable
             Log.d("Woker", "1st Runnable: Thread name: ${Thread.currentThread().name}")
